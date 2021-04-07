@@ -2,10 +2,16 @@ package com.example.aplicacion1
 
 import kotlinx.android.synthetic.main.activity_mapita.*
 import android.annotation.SuppressLint
+import android.app.DownloadManager
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
 import com.mapbox.android.core.location.*
 import com.mapbox.android.core.permissions.PermissionsListener
 import com.mapbox.android.core.permissions.PermissionsManager
@@ -50,6 +56,28 @@ class MapitaActivity : AppCompatActivity() , OnMapReadyCallback, PermissionsList
 
     private val callback: LocationChangeListeningActivityLocationCallback =
             LocationChangeListeningActivityLocationCallback(this)
+    //invocamos el metodo del menu
+    override fun onCreateOptionsMenu(menu: Menu?) : Boolean {
+        //Este metodo sirve para invocar el menu que acabas de crear y lo coloca en el toolbar
+        menuInflater.inflate(R.menu.menusito, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+    override fun onOptionsItemSelected(item: MenuItem): Boolean{
+when(item.itemId){
+    R.id.accion_todos->{
+//Esta seria la primer opcion a ejecutarse para el caso del primer item
+
+    }
+    R.id.accion_uno->{
+//Esta seria la primer opcion a ejecutarse para el caso del segundo item
+
+    }
+    else->{
+        //El default
+    }
+}
+        return super.onOptionsItemSelected(item)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -211,7 +239,18 @@ var loca= JSONObject()
                 var usuario= JSONObject()
                 usuario.put("email", "kathand14@hotmail.com")
                 usuario.put("localizacion", loca)
+                //EL siguiente paso es invocar aqui tu servicio REST con la url
+                var url= "https://benesuela.herokuapp.com/api/usuario"
+                var jsonRequest = JsonObjectRequest(Request.Method.PUT, url, usuario,
+                Response.Listener {
+//Este toast se quita una vez que verifiques que funciona
+                                  Toast.makeText(applicationContext, it.get("mensaje").toString(), Toast.LENGTH_LONG).show()
+                }, Response.ErrorListener {
+                    Toast.makeText(applicationContext, it.toString(),Toast.LENGTH_LONG). show()
+                })
 
+                //Se invoca el request con la clase singleton
+                RegistroActivity.MiSingleton.getInstance(applicationContext).addToRequestQueue(jsonRequest)
                 //Invocar el back end a traves de la url
 
                 if(activity.mapboxMap!=null&&result.lastLocation!=null){

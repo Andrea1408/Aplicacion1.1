@@ -54,6 +54,7 @@ class RegistroActivity : AppCompatActivity() {
                     //con notacion funcional lambda
                     with(preferencias.edit()){
                         putString("nombre",usuario.nombre).commit()
+                        putString("email",usuario.email).commit()
                        // putFloat("edad", 19.8f).commit()
                     }
 
