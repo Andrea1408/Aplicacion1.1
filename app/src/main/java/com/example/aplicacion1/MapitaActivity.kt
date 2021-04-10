@@ -3,6 +3,7 @@ package com.example.aplicacion1
 import kotlinx.android.synthetic.main.activity_mapita.*
 import android.annotation.SuppressLint
 import android.app.DownloadManager
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -66,7 +67,8 @@ class MapitaActivity : AppCompatActivity() , OnMapReadyCallback, PermissionsList
 when(item.itemId){
     R.id.accion_todos->{
 //Esta seria la primer opcion a ejecutarse para el caso del primer item
-
+var i= Intent(applicationContext, MapitaTodos::class.java)
+        startActivity(i)
     }
     R.id.accion_uno->{
 //Esta seria la primer opcion a ejecutarse para el caso del segundo item
