@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Aplicacion1">
-        <activity android:name=".MapitaTodos"></activity>
+        <activity android:name=".ActivityRecyclerView"></activity>
+        <activity android:name=".MapitaTodos" />
         <activity android:name=".MapitaActivity" />
         <activity android:name=".RegistroActivity" />
         <activity android:name=".MainActivity">

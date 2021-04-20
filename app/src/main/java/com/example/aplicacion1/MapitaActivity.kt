@@ -72,7 +72,8 @@ var i= Intent(applicationContext, MapitaTodos::class.java)
     }
     R.id.accion_uno->{
 //Esta seria la primer opcion a ejecutarse para el caso del segundo item
-
+        var i= Intent(applicationContext, ActivityRecyclerView::class.java)
+        startActivity(i)
     }
     else->{
         //El default
